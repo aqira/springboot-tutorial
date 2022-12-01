@@ -21,24 +21,38 @@ public class TutorialApplication {
         //initially, this app has 132 beans before we add more
         try {
 
-            //Mencoba @Bean (133 beans in total)
-            System.out.println("Bean example ");
+            /**
+             * 8. com.springboot.tutorial.TutorialApplication$MyComponent
+             * 9. com.springboot.tutorial.TutorialApplication$MyConfiguration
+             * 10. firstConfigMethod
+             * 11. secondConfigMethod
+             * 12. dependentBean
+             * 13. thisIsABean
+             * 14. mySingleBean
+             * 15. mySecondSingleBean
+             * 16. myDependentBean
+             */
 
-            //Mencoba @Bean (2 method : 135 beans in total)
+            //Mencoba @Bean (13)
+            System.out.println("Bean example :   " + context.getBean("thisIsABean"));
+
+            //Mencoba @Bean dependency (14, 15 (duplicate of 14), 16)
             System.out.printf("""
                     Single Bean : %s
                     Dependent Bean : %s
                     """, context.getBean("mySingleBean"), context.getBean("myDependentBean"));
 
-            //Mencoba @Component (136 beans in total)
+            //Mencoba @Component (8)
             System.out.println("Objek dari MyComponent.class yang telah menjadi bean : " + context.getBean(MyComponent.class));
 
-            //Mencoba @Configuration (1 class + 3 method = 4. 140 beans in total)
+            //Mencoba @Configuration (9,10,11)
             System.out.println("Bean dari MyConfiguration : " + context.getBean(MyConfiguration.class));
 
         } catch (NoSuchBeanDefinitionException noBeanException) {
             System.out.println("Cannot find that bean: " + noBeanException.getBeanName());
         }
+
+
 
     }
 
@@ -86,7 +100,7 @@ public class TutorialApplication {
         }
 
         @Bean
-        public int dependantBean() {
+        public int dependentBean() {
             return myComponent.notBeanMethod();
         }
 
@@ -109,8 +123,8 @@ public class TutorialApplication {
         return new SimpleClass();
     }
 
-    @Bean
-    public String myDependantBean(@Qualifier("mySingleBean") SimpleClass simpleClass) {
+    @Bean //Qualifier biar ga bingung bean yang mana untuk ambil si simple classnya
+    public String myDependentBean(@Qualifier("mySingleBean") SimpleClass simpleClass) {
         return simpleClass.helloWorld();
     }
 }
