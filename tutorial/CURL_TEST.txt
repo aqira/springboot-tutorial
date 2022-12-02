@@ -1,0 +1,23 @@
+Install and run curl command line, then try this:
+
+GET ALL
+curl http://localhost:8080/categories
+
+GET BY ID
+curl http://localhost:8080/categories/1
+
+INSERT
+curl -X POST -H "Content-Type: application/json"
+-d "{\"id\": 1, \"name\": \"Test\"}"
+http://localhost:8080/categories/insert
+
+UPDATE
+curl -X POST -H "Content-Type: application/json"
+-d "{\"name\": \"Test Update\", \"creationDate\":\"2022-04-29\"}"
+http://localhost:8080/categories/update/1
+
+DELETE
+curl -X POST http://localhost:8080/categories/delete/1
+
+note:   This thing is so flippin' sensitive,
+        salah spasi aja bisa ngaruh -_-
