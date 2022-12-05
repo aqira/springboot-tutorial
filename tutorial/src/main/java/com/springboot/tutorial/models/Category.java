@@ -1,22 +1,26 @@
 package com.springboot.tutorial.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+@Entity
 public class Category {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "CategoryID")
+    private Integer id;
+    @Column(name = "Name")
     private String name;
+    @Column(name = "CreationDate")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate creationDate;
 
-    public Category(int id, String name, LocalDate creationDate) {
-        this.id = id;
-        this.name = name;
-        this.creationDate = creationDate;
+    public Category() {
     }
 
     public int getId() {

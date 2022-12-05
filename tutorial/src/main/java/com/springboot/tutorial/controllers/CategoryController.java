@@ -38,7 +38,7 @@ public class CategoryController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "delete/{id}")
-    public Category deleteCategory(@PathVariable Integer id) {
+    public boolean deleteCategory(@PathVariable Integer id) {
         return service.deleteCategoryById(id);
     }
 }
