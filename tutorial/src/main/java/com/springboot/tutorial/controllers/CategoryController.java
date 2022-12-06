@@ -1,5 +1,7 @@
 package com.springboot.tutorial.controllers;
 
+import com.springboot.tutorial.converters.CategoryConverter;
+import com.springboot.tutorial.dtos.CategoryDto;
 import com.springboot.tutorial.models.Category;
 import com.springboot.tutorial.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,31 +15,38 @@ import java.util.List;
 @ResponseBody
 public class CategoryController {
 
+    private CategoryService service;
+    private CategoryConverter converter;
+
     @Autowired
-    CategoryService service;
-
-    @RequestMapping(method = RequestMethod.GET)
-    public List<Category> getAllCategories() {
-        return service.findAllCategory();
+    public CategoryController(CategoryService service, CategoryConverter converter) {
+        this.service = service;
+        this.converter = converter;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public Category getCategoryById(@PathVariable Integer id) {
-        return service.findCategoryById(id);
+    @GetMapping
+    public List<CategoryDto> getAllCategories() {
+        return converter.entityToDto(service.findAllCategory());
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "insert")
-    public Category insertCategory(@RequestBody Category category) {
-        return service.saveCategory(category);
+    @GetMapping("{id}")
+    public CategoryDto getCategoryById(@PathVariable Integer id) {
+        return converter.entityToDto(service.findCategoryById(id));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "update/{id}")
-    public Category updateCategory(@PathVariable Integer id, @RequestBody Category category) {
-        category.setId(id);
-        return service.saveCategory(category);
+    @PostMapping
+    public CategoryDto insertCategory(@RequestBody CategoryDto dto) {
+        Category category = converter.dtoToEntity(dto);
+        return converter.entityToDto(service.saveCategory(category));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "delete/{id}")
+    @PutMapping("{id}")
+    public CategoryDto updateCategory(@PathVariable Integer id, @RequestBody CategoryDto dto) {
+        Category category = converter.dtoToEntity(dto);
+        return converter.entityToDto(service.updateCategory(id, category));
+    }
+
+    @DeleteMapping("delete/{id}")
     public boolean deleteCategory(@PathVariable Integer id) {
         return service.deleteCategoryById(id);
     }
