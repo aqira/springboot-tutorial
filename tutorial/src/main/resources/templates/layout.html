@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Springboot Bootcamp</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/fa/css/all.min.css}">
+</head>
+
+<body>
+<div class="data-content-wrapper">
+    <header th:fragment="header" class="loggedin-header">
+
+        <form class="search-form" action="#">
+            <label for="search-id">
+                <i class="fas fa-search"></i>
+            </label>
+            <input id="search-id" type="text" placeholder="search here..">
+        </form>
+
+        <ol class="header-nav">
+            <li>
+                <a href="#">
+                    <i class="fas fa-bell"></i>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/logout}">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </li>
+        </ol>
+
+    </header>
+    <nav th:fragment="navigation" class="loggedin-nav">
+
+        <div class="company-container">
+            <img class="company-logo" th:src="@{/img/companylogo.png}" alt="company logo">
+            <span class="company-name">Spring Boot Bootcamp</span>
+        </div>
+
+        <div class="user-box">
+            <img class="user-picture" th:src="@{/img/user-2.jpg}" alt="user picture">
+            <a href="#">
+                <span class="user-name">Jane Doe</span>
+            </a>
+            <span class="user-jobtitle">Admin</span>
+        </div>
+
+        <ul class="menu-container">
+            <li class="menu dashboard">
+                <a href="#">
+                    Dashboard
+                    <i class="fas fa-list-alt"></i>
+                </a>
+            </li>
+            <li class="menu product">
+                <a href="#">
+                    Product
+                    <i class="fas fa-address-card"></i>
+                </a>
+            </li>
+            <li class="menu category">
+                <a href="#">
+                    Category
+                    <i class="fas fa-id-badge"></i>
+                </a>
+            </li>
+        </ul>
+
+    </nav>
+    <main class="data-content">
+        <h1>Title</h1>
+        <a href="#" class="btn add">Add new</a>
+        <table class="data-table">
+            <thead>
+            </thead>
+            <tbody>
+            <td class="action-td">
+                <a class="btn btn-tbl edit" href="#">Edit</a>
+                <a class="btn btn-tbl delete" href="#">Delete</a>
+            </td>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </main>
+    <footer th:fragment="footer">
+        Site design &copy; 2022 Aqira
+    </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}">
+    <meta charset="UTF-8">
+    <title>Category</title>
+</head>
+<body>
+<div class="data-content-wrapper">
+    <header th:replace="~{layout :: header}"></header>
+    <nav th:replace="~{layout :: navigation}"></nav>
+    <main class="data-content">
+        <h1>User Table Page</h1>
+        <a href="#" class="btn add">Add new User</a>
+        <table class="data-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Creation Date</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="category : ${categories}">
+                <td th:text="${category.id}"></td>
+                <td th:text="${category.name}"></td>
+                <td th:text="${category.creationDate}"></td>
+                <td class="action-td">
+                    <a class="btn btn-tbl edit" href="#">Edit</a>
+                    <a class="btn btn-tbl delete" href="#">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <td colspan="4"></td>
+            </tfoot>
+        </table>
+    </main>
+    <footer th:replace="~{layout :: footer}"></footer>
+
+</div>
+</body>
+</html>
